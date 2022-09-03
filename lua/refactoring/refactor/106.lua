@@ -355,11 +355,15 @@ local function get_selected_locals(refactor, is_class)
     return utils.table_key_intersect(local_def_map, region_refs_map)
 end
 
+-- TODO: THIS IS WHERE THE ERROR IS
 local function extract_block_setup(refactor)
     local region = Region:from_point(Point:from_cursor(), refactor.bufnr)
     local region_node = region:to_ts_node(refactor.ts:get_root())
     local scope = refactor.ts:get_scope(region_node)
+    print("scope:type()", scope:type())
+    -- TODO: Why is this different?
     local block_first_child = refactor.ts:get_function_body(scope)[1]
+    print("block_first_child:type():", block_first_child:type())
     local block_last_child = block_first_child -- starting off here, we're going to find it manually
 
     -- we have to find the last direct sibling manually because raw queries
@@ -379,6 +383,8 @@ local function extract_block_setup(refactor)
         last_line_region.end_row,
         last_line_region.end_col
     )
+    -- print("In extract_block_setup")
+    region:print_vim_region()
     region_node = region:to_ts_node(refactor.ts:get_root())
 
     refactor.region = region

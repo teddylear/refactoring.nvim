@@ -131,6 +131,7 @@ function M.region_one_line_up_from_node(node)
 end
 
 M.region_complement = function(nodes, region)
+    region:print_vim_region()
     return vim.tbl_filter(function(node)
         return not region:contains(Region:from_node(node))
     end, nodes)

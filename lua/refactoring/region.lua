@@ -117,6 +117,14 @@ function Region:to_vim()
     return self.start_row, self.start_col, self.end_row, self.end_col
 end
 
+-- Print a region, good for debugging
+function Region:print_vim_region()
+    print("start_row:", self.start_row)
+    print("start_col:", self.start_col)
+    print("end_row:", self.end_row)
+    print("end_col:", self.end_col)
+end
+
 function Region:to_ts_node(root)
     local s_row, s_col, e_row, e_col = self:to_ts()
     return root:descendant_for_range(s_row, s_col, e_row, e_col)

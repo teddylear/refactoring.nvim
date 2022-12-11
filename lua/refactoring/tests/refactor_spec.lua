@@ -36,7 +36,7 @@ local function for_each_file(cb)
     )
     for _, file in pairs(files) do
         file = remove_cwd(file)
-        if string.match(file, "start") and not test_utils.check_if_skip_test(file, tests_to_skip) then
+        if string.match(file, "start") and string.match(file, "go") and not test_utils.check_if_skip_test(file, tests_to_skip) then
             cb(file)
         end
     end

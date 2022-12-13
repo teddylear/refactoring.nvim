@@ -46,18 +46,26 @@ end
 local function extract_var_setup(refactor)
     local extract_node = refactor.region_node
 
-    -- local extract_node_text =
-        -- table.concat(utils.get_node_text(extract_node), "")
-    local extract_node_text = table.concat(
-        { vim.treesitter.query.get_node_text(extract_node, refactor.bufnr) },
-        ""
-    )
+    -- TODO: This is the real issue, why does this return nothing?
+
+    -- print("extract_node:", vim.inspect(getmetatable(extract_node)))
+    print("extract_node:child_count()", extract_node:child_count())
+    print("extract_node:child(0):type()", extract_node:child(0):type())
+    print("extract_node:child(0) text", vim.inspect(utils.get_node_text(extract_node:child(0))))
+    print("extract_node:child(1):type()", extract_node:child(1):type())
+    local extract_node_text =
+        table.concat(utils.get_node_text(extract_node), "")
+    -- local extract_node_text = table.concat(
+        -- { vim.treesitter.query.get_node_text(extract_node, refactor.bufnr) },
+        -- ""
+    -- )
     print("extract_node_text:", extract_node_text)
 
     local sexpr = extract_node:sexpr()
     print("sexpr:", sexpr)
     local occurrences =
         Query.find_occurrences(refactor.scope, sexpr, refactor.bufnr)
+    print("occurrences:", vim.inspect(occurrences))
 
     local actual_occurrences = {}
     local texts = {}

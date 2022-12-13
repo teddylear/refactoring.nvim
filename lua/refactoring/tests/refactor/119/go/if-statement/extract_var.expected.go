@@ -12,9 +12,9 @@ type Order struct {
 
 func orderCalculation(order Order, a int, b int) (total float64) {
 	temp := a * b
-    test := "poggers"
+      foobar := "poggers"
+       test := foobar
 	fmt.Println(temp)
-foobar := "poggers"
     if test == foobar {
         fmt.Println("Sounds pretty poggers")
     }

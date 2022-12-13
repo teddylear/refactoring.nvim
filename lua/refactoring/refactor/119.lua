@@ -46,10 +46,16 @@ end
 local function extract_var_setup(refactor)
     local extract_node = refactor.region_node
 
-    local extract_node_text =
-        table.concat(utils.get_node_text(extract_node), "")
+    -- local extract_node_text =
+        -- table.concat(utils.get_node_text(extract_node), "")
+    local extract_node_text = table.concat(
+        { vim.treesitter.query.get_node_text(extract_node, refactor.bufnr) },
+        ""
+    )
+    print("extract_node_text:", extract_node_text)
 
     local sexpr = extract_node:sexpr()
+    print("sexpr:", sexpr)
     local occurrences =
         Query.find_occurrences(refactor.scope, sexpr, refactor.bufnr)
 
@@ -64,6 +70,11 @@ local function extract_var_setup(refactor)
         end
     end
     utils.sort_in_appearance_order(actual_occurrences)
+    -- This is wrong, should be at least 1 occurence
+    print("actual_occurrences:", vim.inspect(actual_occurrences))
+    print("Hitting here!")
+    print("Hitting here!")
+    print("Hitting here!")
 
     local var_name = get_input("119: What is the var name > ")
     assert(var_name ~= "", "Error: Must provide new var name")

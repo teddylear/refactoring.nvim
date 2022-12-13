@@ -12,10 +12,8 @@ type Order struct {
 
 func orderCalculation(order Order, a int, b int) (total float64) {
 	temp := a * b
-	blah := (order.quantity *
-		order.itemPrice) - 7
     test := "poggers"
-	fmt.Println(blah, temp)
+	fmt.Println(temp)
     if test == "poggers" {
         fmt.Println("Sounds pretty poggers")
     }

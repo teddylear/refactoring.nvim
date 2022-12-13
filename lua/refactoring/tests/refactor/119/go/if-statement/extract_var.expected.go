@@ -12,15 +12,14 @@ type Order struct {
 
 func orderCalculation(order Order, a int, b int) (total float64) {
 	temp := a * b
-	basePrice := order.quantity*order.itemPrice
     test := "poggers"
-blah := (basePrice) - 7
-	fmt.Println(blah, temp)
+	fmt.Println(temp)
 foobar := "poggers"
     if test == foobar {
         fmt.Println("Sounds pretty poggers")
     }
-	return basePrice -
+	return order.quantity*order.itemPrice -
 		math.Max(0, order.quantity-500)*order.itemPrice*0.05 +
-		math.Min(basePrice*0.1, 100)
+		math.Min(order.quantity*
+			order.itemPrice*0.1, 100)
 }
